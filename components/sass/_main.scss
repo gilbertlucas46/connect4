@@ -1,0 +1,49 @@
+#loading,
+#fin {
+position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  width: 20%;
+  text-align: center;
+  padding: 20px;
+  font-size: 1.5em;
+  display: none;
+  border: 1px solid #000;
+  background: #fff;
+}
+
+#zone,
+#options {
+  text-align: center;
+}
+#gameTable {
+  svg {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0;
+    margin: auto;
+  }
+}
+.container.theGame {
+   margin-top: 30px;
+}
+.container {
+  text-align: center
+  button {
+    background-image: none;
+    background-color: green;
+        font-size: 14px;
+    &:hover {
+       background-color: #349634;
+      cursor: pointer;
+    }
+  }
+  circle {
+    &:hover {
+       background-color: #349634;
+      cursor: pointer;
+    }
+  }
+}
+    

@@ -1,0 +1,16 @@
+// _base.scss
+// ==============
+body {
+  background: lighten($beige, 10%);
+  font-family: $bodyFont;
+  font-size: 1.1em;
+  text-align: center;
+}
+ 
+
+.container {
+  width: 90%;
+  max-width:980px;
+  margin: 0 auto;
+  position: relative;
+}

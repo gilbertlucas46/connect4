@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Connect4</title>
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="assets/js/script.js"></script>
+</head>
+<body>
+<div class="container">
+	<h1>Connect 4</h1>
+	<button onclick="init();">Restart</button>
+	
+</div><!-- container -->
+
+<div class="container theGame">
+	<div id="gameTable"></div><!-- gameTable -->
+</div>
+<!-- game-table message -->
+<div id="loading">
+  The computer thinks ...
+</div>
+
+
+<div id="theEnd" class="container">
+  You <span id="result"></span>
+  <br/>
+  <button onclick="closeOptions();">close</button>
+</div>
+
+	
+</body>
+</html>
