@@ -9,27 +9,24 @@
 	<script src="assets/js/script.js"></script>
 </head>
 <body>
-<div class="container">
-	<h1>Connect 4</h1>
-	<button onclick="init();">Restart</button>
-	
-</div><!-- container -->
+	<div class="container">
+		<h1>Connect 4</h1>
+		<button onclick="init();">Restart</button>
+	</div><!-- container -->
+	 
+	<div class="container theGame">
+		<div id="gameTable"></div><!-- gameTable -->
+	</div><!-- container -->
+	<!-- game-table message -->
 
-<div class="container theGame">
-	<div id="gameTable"></div><!-- gameTable -->
-</div>
-<!-- game-table message -->
-<div id="loading">
-  The computer thinks ...
-</div>
+	<div id="loading">
+	  The computer thinks ...
+	</div>
 
-
-<div id="theEnd" class="container">
-  You <span id="result"></span>
-  <br/>
-  <button onclick="closeOptions();">close</button>
-</div>
-
-	
+	<div id="theEnd" class="container">
+	  You <span id="result"></span>
+	  <br/>
+	  <button onclick="closeOptions();">close</button>
+	</div><!-- #theEnd -->
 </body>
 </html>

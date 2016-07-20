@@ -124,7 +124,7 @@ section {
 }
 
 #zone,
-#options {
+#options { 
   text-align: center;
 }
 #gameTable svg {
@@ -159,5 +159,5 @@ section {
 
 
 .container {
-  text-align: center
+  text-align: center 
 }

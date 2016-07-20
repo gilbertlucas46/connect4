@@ -25,15 +25,6 @@ Connect4.Board.Display = function(svg, x, y) {
   this.shapeFond.push(gridFond);
   this.shapeFond.push(borderFond);
 
-  // The side pieces (background) //
-  var parts = svg.path();
-  this.shapeFond.push(parts);
-
-  // Morceaux du côté (devant) //
-  var parts2 = parts.clone();
-  parts2.translate(gW, 0);
-  this.shapeDevant.push(parts2);
-
   // Front grille //
   var borderDevant = svg.rect(x, y + d, gW, gH);
   borderDevant.attr({

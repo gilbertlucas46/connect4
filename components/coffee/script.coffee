@@ -363,7 +363,7 @@ Connect4.IA.Computer.prototype =
         nGrid = grid.clone()
         nbTest = 0
         while !nGrid.addPiece(ideal, estPc)
-          nGrid = grid.clone()
+          nGrid = grid.clone() 
           ideal = (ideal + 1) % 7
           nbTest++
           if nbTest > 7
