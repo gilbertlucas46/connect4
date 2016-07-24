@@ -1,3 +1,5 @@
+'use strict';
+
 var Connect4 = {};
 
 // namespace Connect4.Board //
@@ -19,7 +21,7 @@ Connect4.Board.Display = function(svg, x, y) {
   var gH = gridFond.getHeight();
   var borderFond = svg.rect(x + d, y, gW, gH);
   borderFond.attr({
-    "stroke-width": 0
+    'stroke-width': 0
   });
 
   this.shapeFond.push(gridFond);
@@ -28,17 +30,17 @@ Connect4.Board.Display = function(svg, x, y) {
   // Front grille //
   var borderDevant = svg.rect(x, y + d, gW, gH);
   borderDevant.attr({
-    "stroke-width": 0
+    'stroke-width': 0
   });
 
   this.shapeDevant.push(new Connect4.Board.Grid(svg, x, y + Connect4.Board.Display.DEPTH));
   this.shapeDevant.push(borderDevant);
-}
+};
 
 // Constant for the Display class //
 Connect4.Board.Display.DEPTH = 0; // Distance between the two plates //
 
-Connect4.Board.Display.prototype = {
+Connect4.Board.Display.prototype = {  
   'addPiece': function(Color) {
     var d = Connect4.Board.Display.DEPTH;
     var s = Connect4.Board.Cell.CELL_SPACING;
@@ -56,7 +58,7 @@ Connect4.Board.Display.prototype = {
 
     return Math.min(Math.max(Math.floor((x - (this.x + (d / 2))) / w), 0), 6);
   }
-}
+};
 
 // Public class Grid //
 Connect4.Board.Grid = function(svg, x, y) {
@@ -72,7 +74,7 @@ Connect4.Board.Grid = function(svg, x, y) {
       this.shape.push(cell.getShape());
     }
   }
-}
+};
 
 // Constant for the Grid class //
 Connect4.Board.Grid.NB_COLS = 7;
@@ -90,7 +92,7 @@ Connect4.Board.Grid.prototype = {
   'getHeight': function() {
     return Connect4.Board.Grid.NB_ROWS * Connect4.Board.Cell.CELL_WIDTH;
   }
-}
+};
 
 // public class Cell //
 Connect4.Board.Cell = function(svg, x, y) {
@@ -99,31 +101,31 @@ Connect4.Board.Cell = function(svg, x, y) {
 
   var squareHole = svg.path(
     // Circle
-    "M " + s + " " + (w / 2) +
-    " A 20 20 000 00 01 " + (w - s) + " " + (w / 2) +
-    " A 20 20 180 00 01 " + s + " " + (w / 2) +
-    " z " +
+    'M ' + s + ' ' + (w / 2) +
+    ' A 20 20 000 00 01 ' + (w - s) + ' ' + (w / 2) +
+    ' A 20 20 180 00 01 ' + s + ' ' + (w / 2) +
+    ' z ' +
 
     // Square //
-    "M 0 0" +
-    " L0 0" +
-    " L0 " + w +
-    " L" + w + " " + w +
-    " L" + w + " 0" +
-    " z"
+    'M 0 0' +
+    ' L0 0' +
+    ' L0 ' + w +
+    ' L' + w + ' ' + w +
+    ' L' + w + ' 0' +
+    ' z'
   );
 
   squareHole.translate(x * w, y * w);
   squareHole.attr({
-    fill: "brown",
-    "stroke-width": 1,
-    "stroke-opacity": 0
+    fill: 'brown',
+    'stroke-width': 1,
+    'stroke-opacity': 0
   });
 
   var circleBorder = svg.circle(w / 2, w / 2, (w - (s * 2)) / 2);
   circleBorder.translate(x * w, y * w);
   circleBorder.attr({
-    "stroke-width": 0,
+    'stroke-width': 0,
   });
 
   this.shape = svg.set();
@@ -141,7 +143,7 @@ Connect4.Board.Cell.prototype = {
   'getShape': function() {
     return this.shape;
   }
-}
+};
 
 //public class Piece //
 Connect4.Board.Piece = function(svg, Color, x, y) {
@@ -152,7 +154,7 @@ Connect4.Board.Piece = function(svg, Color, x, y) {
   var circleFond = svg.circle();
   circleFond.attr(Color);
   circleFond.attr({
-    "stroke-width": 0
+    'stroke-width': 0
   });
 
   var circleDevant = svg.circle(x + (w / 2), y + (w / 2) + d, w / 2);
@@ -167,19 +169,19 @@ Connect4.Board.Piece = function(svg, Color, x, y) {
   this.y = y;
   this.positionX = 0;
   this.Color = Color;
-}
+};
 
 Connect4.Board.Piece.DEPTH = Connect4.Board.Display.DEPTH - 0;
 Connect4.Board.Piece.WIDTH = 45;
 
 Connect4.Board.Piece.Color = {
   PINK: {
-    "fill": "pink"
+    'fill': 'pink'
   },
   YELLOW: {
-    "fill": "yellow"
+    'fill': 'yellow'
   }
-}
+};
 
 Connect4.Board.Piece.prototype = {
   'getShape': function() {
@@ -204,7 +206,7 @@ Connect4.Board.Piece.prototype = {
     return {
       x: this.x - this.baseX,
       y: this.y - this.baseY
-    }
+    };
   },
 
   'getColor': function() {
@@ -243,12 +245,12 @@ Connect4.Controller.Game = function(svg) {
     }
   })(this);
 
-  document.getElementById("gameTable").onclick = (function(t) {
+  document.getElementById('gameTable').onclick = (function(t) {
     return function() {
       t.mouseClick();
     }
   })(this);
-}
+};
 
 Connect4.Controller.Game.EMPTY = -1;
 Connect4.Controller.Game.COLOR_PC = Connect4.Board.Piece.Color.PINK;
@@ -285,7 +287,7 @@ Connect4.Controller.Game.prototype = {
     var gY = Math.floor(position.y / w) - 1;
 
     // If the path is blocked//
-    if (gY >= 0 && this.grille[gX][gY + 1] != empty) {
+    if (gY >= 0 && this.grille[gX][gY + 1] !== empty) {
       end = true;
     }
 
@@ -307,29 +309,29 @@ Connect4.Controller.Game.prototype = {
       var isFull = true;
 
       for (var i = 0; i < 7; i++) {
-        if (this.grille[i][0] == Connect4.Controller.Game.EMPTY) {
+        if (this.grille[i][0] === Connect4.Controller.Game.EMPTY) {
           isFull = false;
           break;
         }
       }
 
       // Game over //
-      if (Math.abs(score) == Connect4.IA.Computer.prototype.SCORE_FIN || isFull) {
+      if (Math.abs(score) === Connect4.IA.Computer.prototype.SCORE_FIN || isFull) {
         // Match nul //
-        if (isFull && Math.abs(score) != Connect4.IA.Computer.prototype.SCORE_FIN) {
-          document.getElementById("result").innerHTML = "made a draw";
+        if (isFull && Math.abs(score) !== Connect4.IA.Computer.prototype.SCORE_FIN) {
+          document.getElementById('result').innerHTML = 'made a draw';
           // Victory / Defeat //
         } else {
-          document.getElementById("result").innerHTML = (score > 0) ? "lose" : "win";
+          document.getElementById('result').innerHTML = (score > 0) ? 'lose' : 'win';
         }
 
-        document.getElementById("theEnd").style.display = "block";
+        document.getElementById('theEnd').style.display = 'block';
 
         // the switch is forced to PC //
         this.turn = Connect4.Controller.Game.TOUR_PC;
         // On continue //
       } else {
-        if (this.turn == Connect4.Controller.Game.TOUR_HU) {
+        if (this.turn === Connect4.Controller.Game.TOUR_HU) {
           this.doComputerMove();
 
           // next round //
@@ -360,30 +362,30 @@ Connect4.Controller.Game.prototype = {
       pY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
     }
 
-    if (document.getElementById("gameTable").childNodes[0].offsetLeft) {
-      pX -= document.getElementById("gameTable").childNodes[0].offsetLeft;
-      pY -= document.getElementById("gameTable").childNodes[0].offsetTop;
-    } else if (document.getElementById("gameTable").childNodes[0].getBoundingClientRect) {
-      bounds = document.getElementById("gameTable").childNodes[0].getBoundingClientRect();
+    if (document.getElementById('gameTable').childNodes[0].offsetLeft) {
+      pX -= document.getElementById('gameTable').childNodes[0].offsetLeft;
+      pY -= document.getElementById('gameTable').childNodes[0].offsetTop;
+    } else if (document.getElementById('gameTable').childNodes[0].getBoundingClientRect) {
+      bounds = document.getElementById('gameTable').childNodes[0].getBoundingClientRect();
 
       pY -= bounds.top;
       pX -= bounds.left;
     }
 
-    if (this.turn == Connect4.Controller.Game.TOUR_HU && !this.isDropping) {
+    if (this.turn === Connect4.Controller.Game.TOUR_HU && !this.isDropping) {
       this.pieceCurrent.setPosition(this.board.getPositionX(pX, pY));
     }
   },
 
   'mouseClick': function() {
-    if (this.turn == Connect4.Controller.Game.TOUR_HU && !this.isDropping) {
+    if (this.turn === Connect4.Controller.Game.TOUR_HU && !this.isDropping) {
       this.drop();
     }
   },
 
   'doComputerMove': function() {
     // Message loading //
-    document.getElementById("loading").style.display = "block";
+    document.getElementById('loading').style.display = 'block';
 
     // Coup from the computer //
     var self = this;
@@ -396,7 +398,7 @@ Connect4.Controller.Game.prototype = {
       self.drop();
 
       // off loading message //
-      document.getElementById("loading").style.display = "none";
+      document.getElementById('loading').style.display = 'none';
     }, 0);
   }
 };
@@ -405,11 +407,11 @@ Connect4.IA = {};
 
 Connect4.IA.Strategie = {
   'NORMAL': 1
-}
+};
 
 Connect4.IA.Computer = function() {
 
-}
+};
 
 Connect4.IA.Computer.prototype = {
   'SCORE_FIN': 100000,
@@ -431,11 +433,11 @@ Connect4.IA.Computer.prototype = {
     levelInit = (!levelInit) ? level : levelInit;
 
     // If this is the computer tower //
-    var estPc = (levelInit - level) % 2 == 0;
+    var estPc = (levelInit - level) % 2 === 0;
     var scoreGrid = this.evalGrille(grid);
 
     // If the grid contains a connect 4 is completed //
-    if (scoreGrid == this.SCORE_FIN || scoreGrid == -this.SCORE_FIN) {
+    if (scoreGrid === this.SCORE_FIN || scoreGrid === -this.SCORE_FIN) {
       return scoreGrid;
     }
 
@@ -454,7 +456,7 @@ Connect4.IA.Computer.prototype = {
 
         var score = this.bestMove(nGrid, level - 1, levelInit);
 
-        if ((i - skip) == 0) {
+        if ((i - skip) === 0) {
           idealScore = score;
           ideal = i;
         } else {
@@ -475,7 +477,7 @@ Connect4.IA.Computer.prototype = {
       this.scoreCurrent = idealScore;
 
       // Whether to return a movement //
-      if (level == levelInit) {
+      if (level === levelInit) {
         var nGrid = grid.clone();
         var nbTest = 0;
 
@@ -520,7 +522,7 @@ Connect4.IA.Computer.prototype = {
         var diago = (i - j) + 5;
         var diagoB = (i + j);
 
-        if (grid[i][j] == 0) {
+        if (grid[i][j] === 0) {
           coulLigne[j] = 0;
           lstLigne[j] = 0;
           coulCol[i] = 0;
@@ -530,28 +532,28 @@ Connect4.IA.Computer.prototype = {
           coulDiagoB[diagoB] = 0;
           lstDiagoB[diagoB] = 0;
         } else {
-          if (coulLigne[j] == grid[i][j]) {
+          if (coulLigne[j] === grid[i][j]) {
             lstLigne[j]++;
           } else {
             coulLigne[j] = grid[i][j];
             lstLigne[j] = 1;
           }
 
-          if (coulCol[i] == grid[i][j]) {
+          if (coulCol[i] === grid[i][j]) {
             lstCol[i]++;
           } else {
             coulCol[i] = grid[i][j];
             lstCol[i] = 1;
           }
 
-          if (coulDiago[diago] == grid[i][j]) {
+          if (coulDiago[diago] === grid[i][j]) {
             lstDiago[diago]++;
           } else {
             coulDiago[diago] = grid[i][j];
             lstDiago[diago] = 1;
           }
 
-          if (coulDiagoB[diagoB] == grid[i][j]) {
+          if (coulDiagoB[diagoB] === grid[i][j]) {
             lstDiagoB[diagoB]++;
           } else {
             coulDiagoB[diagoB] = grid[i][j];
@@ -560,20 +562,20 @@ Connect4.IA.Computer.prototype = {
         }
 
         // If there is a power 4 the final score is 100000 //
-        if (lstLigne[j] == 4) {
-          return this.SCORE_FIN * ((coulLigne[j] == 2) ? 1 : -1);
+        if (lstLigne[j] === 4) {
+          return this.SCORE_FIN * ((coulLigne[j] === 2) ? 1 : -1);
         }
 
-        if (lstCol[i] == 4) {
-          return this.SCORE_FIN * ((coulCol[i] == 2) ? 1 : -1);
+        if (lstCol[i] === 4) {
+          return this.SCORE_FIN * ((coulCol[i] === 2) ? 1 : -1);
         }
 
-        if (lstDiago[diago] == 4) {
-          return this.SCORE_FIN * ((coulDiago[diago] == 2) ? 1 : -1);
+        if (lstDiago[diago] === 4) {
+          return this.SCORE_FIN * ((coulDiago[diago] === 2) ? 1 : -1);
         }
 
-        if (lstDiagoB[diagoB] == 4) {
-          return this.SCORE_FIN * ((coulDiagoB[diagoB] == 2) ? 1 : -1);
+        if (lstDiagoB[diagoB] === 4) {
+          return this.SCORE_FIN * ((coulDiagoB[diagoB] === 2) ? 1 : -1);
         }
       }
     }
@@ -582,8 +584,8 @@ Connect4.IA.Computer.prototype = {
     // +3 Score is added to each room located in a suitable area //
     for (var i = 0; i < grid.length; i++) {
       for (var j = 0; j < grid[0].length; j++) {
-        if (grid[i][j] != 0) {
-          var estPc = (grid[i][j] == 2);
+        if (grid[i][j] !== 0) {
+          var estPc = (grid[i][j] === 2);
 
           if (((i - j) + 5 >= 3 && (i - j) + 5 <= 8) &&
             ((i + j) >= 3 && (i + j) <= 8)) {
@@ -598,13 +600,13 @@ Connect4.IA.Computer.prototype = {
     // On ajoute +25 au score pour chaque 2 pièces qui forme une ligne potentielle //
     var dblCouple = this.findCouple(g, 2);
     for (var i = 0; i < dblCouple.length; i++) {
-      score += 25 * ((dblCouple[i] == 2) ? this.TYPE_STATEGIE : -1);
+      score += 25 * ((dblCouple[i] === 2) ? this.TYPE_STATEGIE : -1);
     }
 
     // 25 is added to the score for each 2 pieces that form a potential line //
     var trpCouple = this.findCouple(g, 3);
     for (var i = 0; i < trpCouple.length; i++) {
-      score += 250 * ((trpCouple[i] == 2) ? this.TYPE_STATEGIE : -1);
+      score += 250 * ((trpCouple[i] === 2) ? this.TYPE_STATEGIE : -1);
     }
 
     return score;
@@ -637,12 +639,12 @@ Object on which one sends Colors and determines when there is a power potential 
 
         'next': function(color) {
           //If it's a space //
-          if (color == 0) {
-            if (cColor == 0) {
+          if (color === 0) {
+            if (cColor === 0) {
               nbSpaceBefore++;
             } else {
               // Is removed the groups that do not have the correct size //
-              if (size != nbPiece) {
+              if (size !== nbPiece) {
                 size = 0;
                 cColor = 0;
                 nbSpaceBefore = 1;
@@ -661,12 +663,12 @@ Object on which one sends Colors and determines when there is a power potential 
               }
             }
             // If you are still on the same Color //
-          } else if (color == cColor) {
+          } else if (color === cColor) {
             size++;
             // on change of Color //
-          } else if (color != cColor) {
+          } else if (color !== cColor) {
             // If we move to a different token Color //
-            if (cColor != 0) {
+            if (cColor !== 0) {
               nbSpaceBefore = nbSpaceAfter;
               nbSpaceAfter = 0;
             }
@@ -677,7 +679,7 @@ Object on which one sends Colors and determines when there is a power potential 
         },
 
         'end': function() {
-          if (size == nbPiece && nbSpaceBefore + size >= 4) {
+          if (size === nbPiece && nbSpaceBefore + size >= 4) {
             couple.push(cColor);
           }
         }
@@ -709,8 +711,8 @@ Object on which one sends Colors and determines when there is a power potential 
       for (var j = (grid[0].length - 1); j >= 0; j--) {
 
         // If it's a space //
-        if (grid[i][j] == 0) {
-          if (size == nbPiece) {
+        if (grid[i][j] === 0) {
+          if (size === nbPiece) {
             if (size + j + 1 >= 4) {
               couple.push(cColor);
             }
@@ -718,10 +720,10 @@ Object on which one sends Colors and determines when there is a power potential 
 
           break;
           // If you are still on the same Color //
-        } else if (grid[i][j] == cColor) {
+        } else if (grid[i][j] === cColor) {
           size++;
           // on change of colors //
-        } else if (grid[i][j] != cColor) {
+        } else if (grid[i][j] !== cColor) {
           cColor = grid[i][j];
           size = 1;
         }
@@ -757,11 +759,11 @@ Object on which one sends Colors and determines when there is a power potential 
   },
 
 
-}
+};
 
 Connect4.IA.Grid = function() {
   this.cells = [];
-}
+};
 
 Connect4.IA.Grid.prototype = {
   'importGrid': function(grid) {
@@ -771,8 +773,8 @@ Connect4.IA.Grid.prototype = {
     for (var x = 0; x < grid.length; x++) {
       this.cells[x] = [];
       for (var y = 0; y < grid[0].length; y++) {
-        if (grid[x][y] != cellEmpty) {
-          if (grid[x][y].getColor() == cellPC) {
+        if (grid[x][y] !== cellEmpty) {
+          if (grid[x][y].getColor() === cellPC) {
             this.cells[x][y] = 2;
           } else {
             this.cells[x][y] = 1;
@@ -799,12 +801,12 @@ Connect4.IA.Grid.prototype = {
   },
 
   'addPiece': function(col, estPc) {
-    if (this.cells[col][0] != 0) {
+    if (this.cells[col][0] !== 0) {
       return false;
     }
 
     for (var i = 6; i >= 0; i--) {
-      if (this.cells[col][i] == 0) {
+      if (this.cells[col][i] === 0) {
         this.cells[col][i] = (estPc) ? 2 : 1;
         break;
       }
@@ -820,15 +822,16 @@ window.onload = function() {
 
 function init(e) {
   // Reset //
-  document.getElementById("gameTable").innerHTML = "";
-  document.getElementById("theEnd").style.display = "none";
+  document.getElementById('gameTable').innerHTML = '';
+  document.getElementById('theEnd').style.display = 'none';
 
   // Construction //
-  var gameTable = new Raphael("gameTable", 450, 375);
+  var gameTable = new Raphael('gameTable', 450, 375);
 
   var games = new Connect4.Controller.Game(gameTable);
   games.start();
 }
 function closeOptions() {
-    document.getElementById("theEnd").style.display = "none";
-  }
+  document.getElementById('theEnd').style.display = 'none';
+};
+

@@ -5,24 +5,64 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Connect4</title>
 	<link rel="stylesheet" href="assets/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css" />
 	<script src="assets/js/raphael-min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<!-- Latest compiled and minified CSS -->
 </head>
 <body>
+<script src="node_modules/should/should.js"></script>
+<script src="node_modules/mocha/mocha.js"></script>
+<div id="mocha"></div>
+	<script>mocha.setup('bdd')
+
+	</script>
+	<script>
+	   
+	    describe('create game board grid', function () {
+	    		Connect4.Board.Grid.NB_COLS = 7;
+				Connect4.Board.Grid.NB_ROWS = 6; 
+				Connect4.Board.Cell.CELL_SPACING = 5;
+				Connect4.Board.Cell.CELL_WIDTH = 50;
+        	 it('should exist all game prototype', function () {
+		        should.exist(Connect4.Board);
+		        should.exist(Connect4.IA);
+		        should.exist(Connect4.IA.Strategie);
+		        should.exist(Connect4.IA.Grid);
+		        should.exist(Connect4.IA.Computer);
+		    });
+        	 it('should create the grid', function () {
+		       
+		    });
+        	 describe('create the AI', function () {
+		        it('should choose the best move', function () {
+		            true.should.equal(true);
+		        });
+		        it('drop piece should be inactive by default', function () {
+		          	
+
+
+		        });
+		         it('checking End Game', function () {
+		          
+
+		        });
+		    });
+        	
+        	
+	    });
+	</script>
+	<script> mocha.run();</script>
 	<div class="container">
 		<h1>Connect 4</h1>
 		<button onclick="init();">Restart</button>
 	</div><!-- container -->
-	 
 	<div class="container theGame">
 		<div id="gameTable"></div><!-- gameTable -->
 	</div><!-- container -->
 	<!-- game-table message -->
-
-	<div id="loading">
-	  The computer thinks ...
-	</div>
-
+	<div id="loading"> The computer thinks ...</div>
 	<div id="theEnd" class="container">
 	  You <span id="result"></span>
 	  <br/>
