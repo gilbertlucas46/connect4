@@ -3,6 +3,8 @@
 
 > a simple wrapper for [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core) library
 
+Demo: https://connect4in.herokuapp.com/
+
 ## Installation
 ### node
 ```shell
